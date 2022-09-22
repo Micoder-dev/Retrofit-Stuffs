@@ -1,7 +1,7 @@
 package com.micoder.retrofittest.models
 
-data class BoardList(
-    val `data`: List<BoardData>,
+data class ClassList(
+    val `data`: List<ClassData>,
     val message: String,
     val status: Int
 )

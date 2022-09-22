@@ -17,15 +17,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val boardTv = findViewById<TextView>(R.id.tvBoard)
+        val classTv = findViewById<TextView>(R.id.tvClass)
 
-        val boardApi = AssamBoardHelper.getInstance().create(API::class.java)
+        val Api = AssamBoardHelper.getInstance().create(API::class.java)
         // launching a new coroutine
         GlobalScope.launch {
-            val result = boardApi.getBoards()
-            val data = result.body()
-            if (result != null) {
+            val boardResult = Api.getBoards()
+            val boardData = boardResult.body()
+            if (boardResult != null) {
                 withContext(Dispatchers.Main) {
-                    boardTv.text = data!!.message
+                    boardTv.text = boardData!!.message
+                }
+            }
+            val classResult = Api.getClasses()
+            val classData = classResult.body()
+            if (classResult != null) {
+                withContext(Dispatchers.Main) {
+                    classTv.text = classData!!.message
                 }
             }
         }
